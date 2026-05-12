@@ -1,0 +1,143 @@
+:root {
+    --primary-gold: #d4af37;
+    --bg-light: #faf8f5;
+    --text-dark: #333;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    background-image: radial-gradient(circle at 50% 50%, #ffffff 0%, #f1e9db 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.login-card {
+    background: var(--white);
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    text-align: center;
+    border-top: 6px solid var(--primary-gold);
+}
+
+.logo-placeholder {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    border: 2px solid #f0f0f0;
+    overflow: hidden;
+}
+
+.logo-placeholder img {
+    width: 85%;
+    height: auto;
+    object-fit: contain;
+}
+
+h2 {
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-size: 1.6rem;
+}
+
+.subtitle {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #666;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid #eee;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--primary-gold);
+}
+
+.btn-entrar {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary-gold);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-entrar:hover {
+    background: #c29d2e;
+}
+
+.btn-ficha-jovem {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    border: 2px solid var(--primary-gold);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--primary-gold);
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.btn-ficha-jovem:hover {
+    background: var(--primary-gold);
+    color: white;
+}
+
+.footer-links {
+    margin-top: 25px;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.footer-links a {
+    color: var(--primary-gold);
+    text-decoration: none;
+    font-weight: bold;
+}

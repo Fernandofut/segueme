@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segue-Me | Ficha de Inscrição</title>
+    <link rel="stylesheet" href="styleinscricao.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+    <div class="form-container" id="conteudo-ficha">
+        <div class="header-ficha">
+            <img src="logo1.png" alt="Logo Segue-Me" class="logo-ficha">
+            <h1>Ficha de Inscrição</h1>
+            <p>Movimento Segue-Me - Paróquia Santo Antônio</p>
+        </div>
+
+        <form id="form-inscricao">
+            <div class="foto-3x4-container">
+                <div class="foto-box" onclick="document.getElementById('input-foto').click()">
+                    <span id="label-foto">Foto 3x4</span>
+                    <img id="preview-foto" src="" style="display:none; width:100%; height:100%; object-fit:cover; border-radius:10px;">
+                </div>
+                <input type="file" id="input-foto" accept="image/*" style="display:none" onchange="previewImage(event)">
+            </div>
+
+            <div class="section-title">Dados Pessoais</div>
+            <div class="input-group full">
+                <label>Nome Completo</label>
+                <input type="text" id="nome" required>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Telefone</label>
+                    <input type="tel" id="telefone" placeholder="(00) 00000-0000" required>
+                </div>
+                <div class="input-group">
+                    <label>Data de Nascimento</label>
+                    <input type="date" id="nascimento" required>
+                </div>
+            </div>
+
+            <div class="input-group full">
+                <label>Endereço</label>
+                <input type="text" id="endereco" required>
+            </div>
+
+            <div class="input-group full">
+                <label>Naturalidade (Cidade/Estado onde nasceu)</label>
+                <input type="text" id="naturalidade">
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Filiação (Pai)</label>
+                    <input type="text" id="pai">
+                </div>
+                <div class="input-group">
+                    <label>Filiação (Mãe)</label>
+                    <input type="text" id="mae">
+                </div>
+            </div>
+
+            <div class="section-title">Vida Acadêmica e Profissional</div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Escolaridade</label>
+                    <input type="text" id="escolaridade">
+                </div>
+                <div class="input-group">
+                    <label>Situação (Estuda/Trabalha)</label>
+                    <input type="text" id="situacao">
+                </div>
+            </div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Curso</label>
+                    <input type="text" id="curso">
+                </div>
+                <div class="input-group">
+                    <label>Instituição</label>
+                    <input type="text" id="instituicao">
+                </div>
+            </div>
+
+            <div class="section-title">Religiosidade</div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Religião</label>
+                    <input type="text" id="religiao">
+                </div>
+                <div class="input-group">
+                    <label>Igreja que Frequenta</label>
+                    <input type="text" id="igreja">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Sacramentos (Marque os que possui):</label>
+                <div class="checkbox-row">
+                    <label><input type="checkbox" name="sacramento" value="Batismo"> Batismo</label>
+                    <label><input type="checkbox" name="sacramento" value="Eucaristia"> Eucaristia</label>
+                    <label><input type="checkbox" name="sacramento" value="Crisma"> Crisma</label>
+                </div>
+            </div>
+
+            <div class="input-group full">
+                <label>Participa(ou) de algum movimento da igreja? Qual(is)?</label>
+                <input type="text" id="movimentos">
+            </div>
+
+            <div class="section-title">Quem te convidou?</div>
+            <div class="input-group full">
+                <label>Nome de quem convidou</label>
+                <input type="text" id="quem-convidou">
+            </div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Telefone do Convidante</label>
+                    <input type="tel" id="tel-convidante">
+                </div>
+                <div class="input-group">
+                    <label>Endereço do Convidante</label>
+                    <input type="text" id="end-convidante">
+                </div>
+            </div>
+
+            <div class="input-group full">
+                <label>Observações que julgar conveniente:</label>
+                <textarea id="obs" rows="3"></textarea>
+            </div>
+
+            <div class="consentimento-box">
+                <p>Declaro meu expresso consentimento para que os dados coletados nesse formulário sejam utilizados para contatos futuros e para a organização do Encontro e de atividades relacionadas ao movimento Segue-Me.</p>
+                <div class="radio-row">
+                    <label><input type="radio" name="consentimento" value="Sim" required> Sim</label>
+                    <label><input type="radio" name="consentimento" value="Não"> Não</label>
+                </div>
+            </div>
+
+            <div class="assinatura-container">
+                <label>Assinatura do Candidato (Obrigatório)</label>
+                <div class="campo-assinatura"></div>
+            </div>
+        </form>
+    </div>
+
+    <div class="button-container">
+        <button type="button" class="btn-pdf" onclick="gerarPDF()">Baixar Ficha em PDF</button>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('preview-foto');
+                const label = document.getElementById('label-foto');
+                output.src = reader.result;
+                output.style.display = 'block';
+                label.style.display = 'none';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function gerarPDF() {
+            const element = document.getElementById('conteudo-ficha');
+            const opt = {
+                margin: 10,
+                filename: 'Ficha_Inscricao_SegueMe.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+
+    <a href="index.html" target="_blank" class="btn-ficha-jovem">Fazer Ficha Jovem</a>
+</body>
+</html>

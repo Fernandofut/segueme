@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segue-Me | Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="logo-container">
+            <div class="logo-placeholder">
+                <img src="logo1.png" alt="Segue-Me Logo">
+            </div>
+        </div>
+
+        <h2 id="main-title">A Paz esteja contigo!</h2>
+        <p id="main-subtitle" class="subtitle">Faça login para continuar sua jornada.</p>
+
+        <form id="auth-form">
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="seuemail@exemplo.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-entrar" id="submit-btn">Entrar</button>
+            
+            <a href="inscricao.html" target="_blank" class="btn-ficha-jovem">Fazer Ficha Jovem</a>
+        </form>
+
+        <div class="footer-links">
+            <span id="toggle-text">Ainda não tem cadastro?</span>
+            <a href="cadastro.html" id="toggle-link">Criar conta</a>
+        </div>
+    </div>
+
+    <script>
+        // Faz o formulário de login redirecionar para o formulário na mesma aba
+        document.getElementById('auth-form').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            window.location.href = "formulario.html"; 
+        });
+    </script>
+</body>
+</html>
