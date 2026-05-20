@@ -29,8 +29,8 @@
                 <input type="password" id="password" placeholder="••••••••" required>
             </div>
 
-            <button type="submit" class="btn-entrar" id="submit-btn">Entrar</button>
-            
+           <a href="formulario.html" type="submit" class="btn-entrar" id="submit-btn">Entrar</a>
+         <br><br>   
             <a href="inscricao.html" target="_blank" class="btn-ficha-jovem">Fazer Ficha Jovem</a>
         </form>
 
@@ -40,11 +40,28 @@
         </div>
     </div>
 
-    <script>
-        // Faz o formulário de login redirecionar para o formulário na mesma aba
-        document.getElementById('auth-form').addEventListener('submit', function(e) {
-            e.preventDefault(); 
-            window.location.href = "formulario.html"; 
+    <script type="module">
+        import { db, collection, addDoc } from "./firebase-config.js";
+
+        document.getElementById('auth-form').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Impede a página de recarregar automaticamente
+
+            const emailInput = document.getElementById('email').value;
+
+            try {
+                // Envia e salva o acesso em tempo real no banco Firestore do Google
+                await addDoc(collection(db, "historico_acessos"), {
+                    email: emailInput,
+                    data_acesso: new Date()
+                });
+
+                // Após gravar com sucesso no banco, redireciona o usuário
+                window.location.href = "formulario.html";
+            } catch (error) {
+                console.error("Erro ao salvar no Firebase: ", error);
+                // Garante o redirecionamento mesmo se o banco estiver em configuração
+                window.location.href = "formulario.html";
+            }
         });
     </script>
 </body>

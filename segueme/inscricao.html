@@ -25,130 +25,108 @@
                 <input type="file" id="input-foto" accept="image/*" style="display:none" onchange="previewImage(event)">
             </div>
 
-            <div class="section-title">Dados Pessoais</div>
+            <div class="section-title">1. Dados Pessoais</div>
+            
             <div class="input-group full">
-                <label>Nome Completo</label>
-                <input type="text" id="nome" required>
+                <label for="nome-cand">Nome Completo</label>
+                <input type="text" id="nome-cand" required>
             </div>
 
             <div class="input-row">
                 <div class="input-group">
-                    <label>Telefone</label>
-                    <input type="tel" id="telefone" placeholder="(00) 00000-0000" required>
+                    <label for="nasc-cand">Data de Nascimento</label>
+                    <input type="date" id="nasc-cand" required>
                 </div>
                 <div class="input-group">
-                    <label>Data de Nascimento</label>
-                    <input type="date" id="nascimento" required>
+                    <label for="apelido-cand">Como gosta de ser chamado?</label>
+                    <input type="text" id="apelido-cand">
                 </div>
-            </div>
-
-            <div class="input-group full">
-                <label>Endereço</label>
-                <input type="text" id="endereco" required>
-            </div>
-
-            <div class="input-group full">
-                <label>Naturalidade (Cidade/Estado onde nasceu)</label>
-                <input type="text" id="naturalidade">
             </div>
 
             <div class="input-row">
                 <div class="input-group">
-                    <label>Filiação (Pai)</label>
-                    <input type="text" id="pai">
+                    <label for="whats-cand">WhatsApp</label>
+                    <input type="tel" id="whats-cand" placeholder="(00) 00000-0000" required>
                 </div>
                 <div class="input-group">
-                    <label>Filiação (Mãe)</label>
-                    <input type="text" id="mae">
+                    <label for="email-cand">E-mail</label>
+                    <input type="email" id="email-cand" required>
                 </div>
             </div>
 
-            <div class="section-title">Vida Acadêmica e Profissional</div>
+            <div class="input-row">
+                <div class="input-group" style="flex: 3;">
+                    <label for="end-cand">Endereço Residencial</label>
+                    <input type="text" id="end-cand" required>
+                </div>
+                <div class="input-group" style="flex: 1;">
+                    <label for="num-cand">Nº</label>
+                    <input type="text" id="num-cand" required>
+                </div>
+            </div>
+
+            <div class="section-title">2. Filiação e Contatos de Emergência</div>
             <div class="input-row">
                 <div class="input-group">
-                    <label>Escolaridade</label>
-                    <input type="text" id="escolaridade">
+                    <label for="pai-cand">Nome do Pai</label>
+                    <input type="text" id="pai-cand" required>
                 </div>
                 <div class="input-group">
-                    <label>Situação (Estuda/Trabalha)</label>
-                    <input type="text" id="situacao">
+                    <label for="tel-pai">Telefone do Pai</label>
+                    <input type="tel" id="tel-pai" required>
                 </div>
             </div>
+
             <div class="input-row">
                 <div class="input-group">
-                    <label>Curso</label>
-                    <input type="text" id="curso">
+                    <label for="mae-cand">Nome da Mãe</label>
+                    <input type="text" id="mae-cand" required>
                 </div>
                 <div class="input-group">
-                    <label>Instituição</label>
-                    <input type="text" id="instituicao">
+                    <label for="tel-mae">Telefone do Mãe</label>
+                    <input type="tel" id="tel-mae" required>
                 </div>
             </div>
 
-            <div class="section-title">Religiosidade</div>
+            <div class="section-title">3. Vida Religiosa e Sacramentos</div>
+            <p style="font-size: 13px; margin-bottom: 5px; font-weight: bold;">Quais sacramentos você possui?</p>
+            <div class="checkbox-row">
+                <label><input type="checkbox" id="sacr-bat"> Batismo</label>
+                <label><input type="checkbox" id="sacr-com"> Primeira Comunhão</label>
+                <label><input type="checkbox" id="sacr-cri"> Crisma</label>
+            </div>
+
+            <div class="section-title">4. Quem te Convidou?</div>
             <div class="input-row">
                 <div class="input-group">
-                    <label>Religião</label>
-                    <input type="text" id="religiao">
+                    <label for="quem-conv">Nome de quem te convidou</label>
+                    <input type="text" id="quem-conv" required>
                 </div>
                 <div class="input-group">
-                    <label>Igreja que Frequenta</label>
-                    <input type="text" id="igreja">
+                    <label for="whats-conv">WhatsApp de quem convidou</label>
+                    <input type="tel" id="whats-conv" required>
                 </div>
-            </div>
-
-            <div class="input-group">
-                <label>Sacramentos (Marque os que possui):</label>
-                <div class="checkbox-row">
-                    <label><input type="checkbox" name="sacramento" value="Batismo"> Batismo</label>
-                    <label><input type="checkbox" name="sacramento" value="Eucaristia"> Eucaristia</label>
-                    <label><input type="checkbox" name="sacramento" value="Crisma"> Crisma</label>
-                </div>
-            </div>
-
-            <div class="input-group full">
-                <label>Participa(ou) de algum movimento da igreja? Qual(is)?</label>
-                <input type="text" id="movimentos">
-            </div>
-
-            <div class="section-title">Quem te convidou?</div>
-            <div class="input-group full">
-                <label>Nome de quem convidou</label>
-                <input type="text" id="quem-convidou">
-            </div>
-            <div class="input-row">
-                <div class="input-group">
-                    <label>Telefone do Convidante</label>
-                    <input type="tel" id="tel-convidante">
-                </div>
-                <div class="input-group">
-                    <label>Endereço do Convidante</label>
-                    <input type="text" id="end-convidante">
-                </div>
-            </div>
-
-            <div class="input-group full">
-                <label>Observações que julgar conveniente:</label>
-                <textarea id="obs" rows="3"></textarea>
             </div>
 
             <div class="consentimento-box">
-                <p>Declaro meu expresso consentimento para que os dados coletados nesse formulário sejam utilizados para contatos futuros e para a organização do Encontro e de atividades relacionadas ao movimento Segue-Me.</p>
-                <div class="radio-row">
-                    <label><input type="radio" name="consentimento" value="Sim" required> Sim</label>
-                    <label><input type="radio" name="consentimento" value="Não"> Não</label>
-                </div>
+                <input type="checkbox" id="lgpd" required>
+                <label for="lgpd" style="display: inline; font-weight: normal;">
+                    Autorizo o movimento Segue-Me a guardar e utilizar meus dados exclusivamente para fins de organização do encontro, respeitando as normas da LGPD.
+                </label>
             </div>
 
             <div class="assinatura-container">
                 <label>Assinatura do Candidato (Obrigatório)</label>
                 <div class="campo-assinatura"></div>
             </div>
+            
+            <br>
+            <button type="submit" style="width: 100%; padding: 14px; background: #d4af37; border: none; color: white; font-weight: bold; border-radius: 4px; cursor: pointer;">Enviar Ficha Eletronicamente</button>
         </form>
     </div>
 
     <div class="button-container">
-        <button type="button" class="btn-pdf" onclick="gerarPDF()">Baixar Ficha em PDF</button>
+        <button type="button" class="btn-pdf" onclick="gerarPDF()">Baixar Cópia em PDF</button>
     </div>
 
     <script>
@@ -177,6 +155,47 @@
         }
     </script>
 
-    <a href="index.html" target="_blank" class="btn-ficha-jovem">Fazer Ficha Jovem</a>
+    <script type="module">
+        import { db, collection, addDoc } from "./firebase-config.js";
+
+        document.getElementById('form-inscricao').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const inscricaoNovoJovem = {
+                nome_candidato: document.getElementById('nome-cand').value,
+                data_nascimento: document.getElementById('nasc-cand').value,
+                apelido: document.getElementById('apelido-cand').value,
+                whatsapp: document.getElementById('whats-cand').value,
+                email: document.getElementById('email-cand').value,
+                endereco: document.getElementById('end-cand').value,
+                numero: document.getElementById('num-cand').value,
+                filiacao: {
+                    pai: document.getElementById('pai-cand').value,
+                    telefone_pai: document.getElementById('tel-pai').value,
+                    mae: document.getElementById('mae-cand').value,
+                    telefone_mae: document.getElementById('tel-mae').value
+                },
+                sacramentos: {
+                    batismo: document.getElementById('sacr-bat').checked,
+                    comunhao: document.getElementById('sacr-com').checked,
+                    crisma: document.getElementById('sacr-cri').checked
+                },
+                padrinho_madrinha: {
+                    nome: document.getElementById('quem-conv').value,
+                    whatsapp: document.getElementById('whats-conv').value
+                },
+                data_envio: new Date(),
+                status: "Pendente"
+            };
+
+            try {
+                await addDoc(collection(db, "inscricoes_novos_jovens"), inscricaoNovoJovem);
+                alert("Sua Ficha de Inscrição foi enviada com sucesso para a coordenação do Segue-Me!");
+            } catch (error) {
+                console.error("Erro ao enviar inscrição: ", error);
+                alert("Erro ao salvar inscrição no servidor do Google.");
+            }
+        });
+    </script>
 </body>
 </html>

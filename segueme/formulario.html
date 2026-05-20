@@ -19,7 +19,6 @@
         <p class="subtitle text-center">Preencha todos os requisitos para atualizar seu cadastro no movimento.</p>
 
         <form id="main-form">
-            <!-- TIPO DE PERFIL -->
             <div class="input-group">
                 <label>Eu sou:</label>
                 <select id="perfil-tipo" onchange="togglePerfil()">
@@ -28,162 +27,126 @@
                 </select>
             </div>
 
-            <!-- DADOS BÁSICOS (JOVEM OU TITULAR) -->
             <div class="section-title">Dados Pessoais</div>
             
             <div id="dados-jovem">
                 <div class="input-group">
-                    <label for="nome">Nome Completo</label>
-                    <input type="text" id="nome" placeholder="Digite seu nome completo">
+                    <label for="nome-membro">Nome Completo</label>
+                    <input type="text" id="nome-membro" required>
                 </div>
+
                 <div class="input-row">
                     <div class="input-group">
-                        <label>Data de Nascimento</label>
-                        <input type="date">
+                        <label for="nascimento-membro">Data de Nascimento</label>
+                        <input type="date" id="nascimento-membro" required>
                     </div>
                     <div class="input-group">
-                        <label>Idade</label>
-                        <input type="number" placeholder="Ex: 22">
+                        <label for="whatsapp-membro">WhatsApp</label>
+                        <input type="tel" id="whatsapp-membro" placeholder="(00) 00000-0000" required>
                     </div>
                 </div>
+
                 <div class="input-group">
-                    <label>Telefone / WhatsApp</label>
-                    <input type="tel" placeholder="(00) 00000-0000">
-                </div>
-                <div class="input-group">
-                    <label>Endereço Residencial</label>
-                    <input type="text" placeholder="Rua, Número, Bairro, Cidade">
+                    <label for="endereco-membro">Endereço Residencial</label>
+                    <input type="text" id="endereco-membro" placeholder="Rua, Número, Bairro" required>
                 </div>
             </div>
 
-            <!-- CAMPOS EXCLUSIVOS PARA CASADOS (TIOS) -->
             <div id="campos-tios" class="hidden">
                 <div class="section-title">Dados do Cônjuge</div>
                 <div class="input-group">
-                    <label>Nome do Cônjuge</label>
-                    <input type="text" placeholder="Nome completo do marido/esposa">
+                    <label for="nome-conjuge">Nome do Cônjuge</label>
+                    <input type="text" id="nome-conjuge">
                 </div>
                 <div class="input-row">
                     <div class="input-group">
-                        <label>Idade do Cônjuge</label>
-                        <input type="number" placeholder="Idade">
+                        <label for="nascimento-conjuge">Data de Nasc. Cônjuge</label>
+                        <input type="date" id="nascimento-conjuge">
                     </div>
                     <div class="input-group">
-                        <label>Telefone do Cônjuge</label>
-                        <input type="tel" placeholder="(00) 00000-0000">
+                        <label for="whatsapp-conjuge">WhatsApp Cônjuge</label>
+                        <input type="tel" id="whatsapp-conjuge" placeholder="(00) 00000-0000">
                     </div>
                 </div>
-                <div class="input-group">
-                    <label>Tem filhos? Quantos?</label>
-                    <input type="text" placeholder="Ex: Sim, 2 filhos">
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="fez-ecc">
-                    <label for="fez-ecc">Já fizeram o ECC?</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="jovens-segue-me">
-                    <label for="jovens-segue-me">São jovens que fizeram o Segue-me e casaram?</label>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="tem-filhos">Tem Filhos?</label>
+                        <select id="tem-filhos">
+                            <option value="nao">Não</option>
+                            <option value="sim">Sim</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="qtd-filhos">Quantos?</label>
+                        <input type="number" id="qtd-filhos" value="0">
+                    </div>
                 </div>
             </div>
 
-            <!-- HISTÓRICO NO SEGUE-ME -->
-            <div class="section-title">Minha Jornada no Segue-Me</div>
-            
+            <div class="section-title">Histórico no Segue-Me</div>
             <div class="input-row">
                 <div class="input-group">
-                    <label>Ano que FEZ o Segue-me</label>
-                    <input type="number" placeholder="Ex: 2013">
+                    <label for="ano-encontro">Ano que fez o Encontro</label>
+                    <input type="number" id="ano-encontro" placeholder="Ex: 2018" required>
                 </div>
                 <div class="input-group">
-                    <label>Qual o Segue-me? (Paróquia/Cidade)</label>
-                    <input type="text" placeholder="Ex: Santo Antônio / BG">
+                    <label for="paroquia">Paróquia onde fez</label>
+                    <input type="text" id="paroquia" required>
                 </div>
             </div>
 
-            <div class="input-group">
-                <label>Última equipe que serviu:</label>
-                <input type="text" placeholder="Ex: Cozinha (2023)">
+            <div class="checkbox-group">
+                <input type="checkbox" id="participou-ed"> <label for="participou-ed">Já participou da E.D. ou Conselho?</label>
             </div>
 
-            <!-- ABA DE EQUIPES TRABALHADAS -->
-            <div class="section-title">Histórico de Equipes Trabalhadas</div>
-            <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">
-                Adicione cada equipe, o ano e se foi coordenador:
-            </p>
+            <div class="section-title">Sacramentos Recebidos</div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="sacr-batismo"> <label for="sacr-batismo">Batismo</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="sacr-comunhao"> <label for="sacr-comunhao">Primeira Comunhão</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="sacr-crisma"> <label for="sacr-crisma">Crisma</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="sacr-matrimonio"> <label for="sacr-matrimonio">Matrimônio (Se aplicável)</label>
+            </div>
+
+            <div class="section-title">Equipes em que já trabalhou</div>
             <div id="lista-equipes">
                 <div class="history-item">
                     <div class="input-row">
                         <div class="input-group" style="flex: 2;">
                             <label>Equipe</label>
-                            <input type="text" placeholder="Ex: Montagem">
+                            <input type="text" class="eq-nome" placeholder="Ex: Cozinha" required>
                         </div>
                         <div class="input-group" style="flex: 1;">
                             <label>Ano</label>
-                            <input type="number" placeholder="2015">
+                            <input type="number" class="eq-ano" placeholder="2023" required>
                         </div>
                     </div>
                     <div class="checkbox-group">
-                        <input type="checkbox"> <label>Fui Coordenador(a) nesta equipe</label>
+                        <input type="checkbox" class="eq-coord"> <label>Fui Coordenador(a) nesta equipe</label>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn-add" onclick="addEquipe()">+ Adicionar outra equipe/ano</button>
+            <button type="button" class="btn-add" onclick="addEquipe()">+ Adicionar Outra Equipe</button>
 
-            <!-- LIDERANÇA E CONSELHO -->
-            <div class="section-title">Liderança e Conselho</div>
-            
-            <div class="checkbox-group">
-                <input type="checkbox" id="serviu-lideranca">
-                <label for="serviu-lideranca">Já serviu em cargo de liderança na igreja?</label>
+            <div class="section-title">Informações Adicionais</div>
+            <div class="input-group">
+                <label for="talentos">Possui algum talento específico? (Canto, Instrumento, Teatro, Desenho, TI...)</label>
+                <input type="text" id="talentos" placeholder="Ex: Toco Violão, Sei filmar">
             </div>
             <div class="input-group">
-                <label>Se sim, qual cargo e onde?</label>
-                <input type="text" placeholder="Ex: Coordenador de Setor, Vice-presidência...">
+                <label for="restricoes">Restrições Alimentares / Alergias / Problemas de Saúde</label>
+                <textarea id="restricoes" rows="3" placeholder="Se houver, especifique aqui..."></textarea>
             </div>
 
-            <div class="checkbox-group">
-                <input type="checkbox" id="vontade-lideranca">
-                <label for="vontade-lideranca">Tem vontade/interesse em servir em cargos de liderança?</label>
-            </div>
-
-            <div class="checkbox-group">
-                <input type="checkbox" id="fez-ed">
-                <label for="fez-ed">Já fez parte da ED (Encontro de Dirigentes) ou Conselho?</label>
-            </div>
-            <div class="input-group">
-                <label>Se sim, em qual Pasta?</label>
-                <input type="text" placeholder="Ex: Pasta da Cozinha, Espiritualidade, Pós-Encontro...">
-            </div>
-
-            <!-- TALENTOS E SAÚDE -->
-            <div class="section-title">Talentos e Saúde</div>
-            
-            <div class="input-row">
-                <div class="input-group">
-                    <label>Toca algum instrumento?</label>
-                    <input type="text" placeholder="Qual?">
-                </div>
-                <div class="input-group">
-                    <label>Você canta?</label>
-                    <input type="text" placeholder="Sim/Não">
-                </div>
-            </div>
-
-            <div class="checkbox-group">
-                <input type="checkbox" id="dar-palestra">
-                <label for="dar-palestra">Gostaria de ser chamado para dar palestra no Segue-me?</label>
-            </div>
-
-            <div class="input-group">
-                <label>Tem alguma alergia ou restrição?</label>
-                <textarea rows="3" placeholder="Alergias alimentares, medicamentosas, etc."></textarea>
-            </div>
-
-            <button type="submit" class="btn-entrar">Salvar Ficha de Cadastro</button>
+            <button type="submit" class="btn-entrar">Salvar Ficha Completa</button>
         </form>
 
-        <div class="footer-links" style="text-align: center; margin-top: 20px;">
+        <div style="text-align: center; margin-top: 20px;">
             <a href="index.html">Voltar ao Login</a>
         </div>
     </div>
@@ -204,22 +167,87 @@
             const div = document.createElement('div');
             div.className = 'history-item';
             div.innerHTML = `
-                <div class="input-row">
-                    <div class="input-group" style="flex: 2;">
+                <div class=\"input-row\">
+                    <div class=\"input-group\" style=\"flex: 2;\">
                         <label>Equipe</label>
-                        <input type="text" placeholder="Ex: Montagem">
+                        <input type=\"text\" class=\"eq-nome\" placeholder=\"Ex: Montagem\" required>
                     </div>
-                    <div class="input-group" style="flex: 1;">
+                    <div class=\"input-group\" style=\"flex: 1;\">
                         <label>Ano</label>
-                        <input type="number" placeholder="2015">
+                        <input type=\"number\" class=\"eq-ano\" placeholder=\"2015\" required>
                     </div>
                 </div>
-                <div class="checkbox-group">
-                    <input type="checkbox"> <label>Fui Coordenador(a) nesta equipe</label>
+                <div class=\"checkbox-group\">
+                    <input type=\"checkbox\" class=\"eq-coord\"> <label>Fui Coordenador(a) nesta equipe</label>
                 </div>
             `;
             container.appendChild(div);
         }
+    </script>
+
+    <script type="module">
+        import { db, collection, addDoc } from "./firebase-config.js";
+
+        document.getElementById('main-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Monta dinamicamente a lista de equipes salvas pelo usuário
+            const equipesTrabalhadas = [];
+            const itensEquipe = document.querySelectorAll('.history-item');
+            itensEquipe.forEach(item => {
+                equipesTrabalhadas.push({
+                    equipe: item.querySelector('.eq-nome').value,
+                    ano: item.querySelector('.eq-ano').value,
+                    coordenador: item.querySelector('.eq-coord').checked
+                });
+            });
+
+            const perfil = document.getElementById('perfil-tipo').value;
+
+            // Une todos os dados coletados no formulário
+            const fichaMembro = {
+                tipo_perfil: perfil,
+                nome: document.getElementById('nome-membro').value,
+                data_nascimento: document.getElementById('nascimento-membro').value,
+                whatsapp: document.getElementById('whatsapp-membro').value,
+                endereco: document.getElementById('endereco-membro').value,
+                
+                // Salva dados de casamento caso seja Tio
+                dados_conjuge: perfil === 'tio' ? {
+                    nome: document.getElementById('nome-conjuge').value,
+                    data_nascimento: document.getElementById('nascimento-conjuge').value,
+                    whatsapp: document.getElementById('whatsapp-conjuge').value,
+                    tem_filhos: document.getElementById('tem-filhos').value,
+                    qtd_filhos: document.getElementById('qtd-filhos').value
+                } : null,
+
+                historico_geral: {
+                    ano_encontro: document.getElementById('ano-encontro').value,
+                    paroquia: document.getElementById('paroquia').value,
+                    passou_pela_ed: document.getElementById('participou-ed').checked
+                },
+
+                sacramentos: {
+                    batismo: document.getElementById('sacr-batismo').checked,
+                    comunhao: document.getElementById('sacr-comunhao').checked,
+                    crisma: document.getElementById('sacr-crisma').checked,
+                    matrimonio: document.getElementById('sacr-matrimonio').checked
+                },
+
+                equipes: equipesTrabalhadas,
+                talentos: document.getElementById('talentos').value,
+                restricoes_saude: document.getElementById('restricoes').value,
+                ultima_atualizacao: new Date()
+            };
+
+            try {
+                await addDoc(collection(db, "fichas_membros"), fichaMembro);
+                alert("Ficha de Membro salva com sucesso!");
+            } catch (error) {
+                console.error("Erro ao salvar ficha: ", error);
+                alert("Erro ao enviar características.");
+            }
+        });
     </script>
 </body>
 </html>

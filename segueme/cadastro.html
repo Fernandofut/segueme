@@ -59,5 +59,38 @@
         </div>
     </div>
 
+    <script type="module">
+        import { db, collection, addDoc } from "./firebase-config.js";
+
+        document.getElementById('form-cadastro').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const senha = document.getElementById('senha').value;
+            const confirmarSenha = document.getElementById('confirmar-senha').value;
+
+            if (senha !== confirmarSenha) {
+                alert("As senhas não coincidem!");
+                return;
+            }
+
+            const dadosUsuario = {
+                nome: document.getElementById('nome').value,
+                data_nascimento: document.getElementById('nascimento').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                email: document.getElementById('email').value,
+                senha: senha, // Nota: Em um sistema real de produção, use o Firebase Auth para senhas criptografadas
+                data_cadastro: new Date()
+            };
+
+            try {
+                await addDoc(collection(db, "usuarios"), dadosUsuario);
+                alert("Cadastro realizado com sucesso! Faça seu login.");
+                window.location.href = "index.html";
+            } catch (error) {
+                console.error("Erro ao cadastrar: ", error);
+                alert("Erro ao salvar cadastro.");
+            }
+        });
+    </script>
 </body>
 </html>
