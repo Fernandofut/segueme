@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segue-Me | Ficha de Cadastro Completa</title>
+    <link rel="stylesheet" href="styleformulario.css">
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="logo-container">
+            <div class="logo-placeholder">
+                <img src="logo1.png" alt="Segue-Me Logo">
+            </div>
+        </div>
+
+        <h2 class="text-center">Ficha de Membro</h2>
+        <p class="subtitle text-center">Preencha todos os requisitos para atualizar seu cadastro no movimento.</p>
+
+        <form id="main-form">
+            <div class="input-group">
+                <label>Eu sou:</label>
+                <select id="perfil-tipo" onchange="togglePerfil()">
+                    <option value="jovem">Jovem</option>
+                    <option value="tio">Casado (Tio/Tia)</option>
+                </select>
+            </div>
+
+            <div class="section-title">Dados Pessoais</div>
+            
+            <div id="dados-jovem">
+                <div class="input-group">
+                    <label for="nome-membro">Nome Completo</label>
+                    <input type="text" id="nome-membro" required>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="nascimento-membro">Data de Nascimento</label>
+                        <input type="date" id="nascimento-membro" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="whatsapp-membro">WhatsApp</label>
+                        <input type="tel" id="whatsapp-membro" placeholder="(00) 00000-0000" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="endereco-membro">Endereço Residencial</label>
+                    <input type="text" id="endereco-membro" placeholder="Rua, Número, Bairro" required>
+                </div>
+            </div>
+
+            <div id="campos-tios" class="hidden">
+                <div class="section-title">Dados do Cônjuge</div>
+                <div class="input-group">
+                    <label for="nome-conjuge">Nome do Cônjuge</label>
+                    <input type="text" id="nome-conjuge">
+                </div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="nascimento-conjuge">Data de Nasc. Cônjuge</label>
+                        <input type="date" id="nascimento-conjuge">
+                    </div>
+                    <div class="input-group">
+                        <label for="whatsapp-conjuge">WhatsApp Cônjuge</label>
+                        <input type="tel" id="whatsapp-conjuge" placeholder="(00) 00000-0000">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="tem-filhos">Tem Filhos?</label>
+                        <select id="tem-filhos">
+                            <option value="nao">Não</option>
+                            <option value="sim">Sim</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="qtd-filhos">Quantos?</label>
+                        <input type="number" id="qtd-filhos" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">Histórico no Segue-Me</div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="ano-encontro">Ano que fez o Encontro</label>
+                    <input type="number" id="ano-encontro" placeholder="Ex: 2018" required>
+                </div>
+                <div class="input-group">
+                    <label for="paroquia">Paróquia onde fez</label>
+                    <input type="text" id="paroquia" required>
+                </div>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="participou-ed"> <label for="participou-ed">Já participou da E.D. ou Conselho?</label>
+            </div>
+
+            <div class="section-title">Sacramentos Recebidos</div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="sacr-batismo"> <label for="sacr-batismo">Batismo</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="sacr-comunhao"> <label for="sacr-comunhao">Primeira Comunhão</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="sacr-crisma"> <label for="sacr-crisma">Crisma</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="sacr-matrimonio"> <label for="sacr-matrimonio">Matrimônio (Se aplicável)</label>
+            </div>
+
+            <div class="section-title">Equipes em que já trabalhou</div>
+            <div id="lista-equipes">
+                <div class="history-item">
+                    <div class="input-row">
+                        <div class="input-group" style="flex: 2;">
+                            <label>Equipe</label>
+                            <input type="text" class="eq-nome" placeholder="Ex: Cozinha" required>
+                        </div>
+                        <div class="input-group" style="flex: 1;">
+                            <label>Ano</label>
+                            <input type="number" class="eq-ano" placeholder="2023" required>
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" class="eq-coord"> <label>Fui Coordenador(a) nesta equipe</label>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn-add" onclick="addEquipe()">+ Adicionar Outra Equipe</button>
+
+            <div class="section-title">Informações Adicionais</div>
+            <div class="input-group">
+                <label for="talentos">Possui algum talento específico? (Canto, Instrumento, Teatro, Desenho, TI...)</label>
+                <input type="text" id="talentos" placeholder="Ex: Toco Violão, Sei filmar">
+            </div>
+            <div class="input-group">
+                <label for="restricoes">Restrições Alimentares / Alergias / Problemas de Saúde</label>
+                <textarea id="restricoes" rows="3" placeholder="Se houver, especifique aqui..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-entrar">Salvar Ficha Completa</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="index.html">Voltar ao Login</a>
+        </div>
+    </div>
+
+    <script>
+        function togglePerfil() {
+            const perfil = document.getElementById('perfil-tipo').value;
+            const camposTios = document.getElementById('campos-tios');
+            if (perfil === 'tio') {
+                camposTios.classList.remove('hidden');
+            } else {
+                camposTios.classList.add('hidden');
+            }
+        }
+
+        function addEquipe() {
+            const container = document.getElementById('lista-equipes');
+            const div = document.createElement('div');
+            div.className = 'history-item';
+            div.innerHTML = `
+                <div class=\"input-row\">
+                    <div class=\"input-group\" style=\"flex: 2;\">
+                        <label>Equipe</label>
+                        <input type=\"text\" class=\"eq-nome\" placeholder=\"Ex: Montagem\" required>
+                    </div>
+                    <div class=\"input-group\" style=\"flex: 1;\">
+                        <label>Ano</label>
+                        <input type=\"number\" class=\"eq-ano\" placeholder=\"2015\" required>
+                    </div>
+                </div>
+                <div class=\"checkbox-group\">
+                    <input type=\"checkbox\" class=\"eq-coord\"> <label>Fui Coordenador(a) nesta equipe</label>
+                </div>
+            `;
+            container.appendChild(div);
+        }
+    </script>
+
+    <script type="module">
+        import { db, collection, addDoc } from "./firebase-config.js";
+
+        document.getElementById('main-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Monta dinamicamente a lista de equipes salvas pelo usuário
+            const equipesTrabalhadas = [];
+            const itensEquipe = document.querySelectorAll('.history-item');
+            itensEquipe.forEach(item => {
+                equipesTrabalhadas.push({
+                    equipe: item.querySelector('.eq-nome').value,
+                    ano: item.querySelector('.eq-ano').value,
+                    coordenador: item.querySelector('.eq-coord').checked
+                });
+            });
+
+            const perfil = document.getElementById('perfil-tipo').value;
+
+            // Une todos os dados coletados no formulário
+            const fichaMembro = {
+                tipo_perfil: perfil,
+                nome: document.getElementById('nome-membro').value,
+                data_nascimento: document.getElementById('nascimento-membro').value,
+                whatsapp: document.getElementById('whatsapp-membro').value,
+                endereco: document.getElementById('endereco-membro').value,
+                
+                // Salva dados de casamento caso seja Tio
+                dados_conjuge: perfil === 'tio' ? {
+                    nome: document.getElementById('nome-conjuge').value,
+                    data_nascimento: document.getElementById('nascimento-conjuge').value,
+                    whatsapp: document.getElementById('whatsapp-conjuge').value,
+                    tem_filhos: document.getElementById('tem-filhos').value,
+                    qtd_filhos: document.getElementById('qtd-filhos').value
+                } : null,
+
+                historico_geral: {
+                    ano_encontro: document.getElementById('ano-encontro').value,
+                    paroquia: document.getElementById('paroquia').value,
+                    passou_pela_ed: document.getElementById('participou-ed').checked
+                },
+
+                sacramentos: {
+                    batismo: document.getElementById('sacr-batismo').checked,
+                    comunhao: document.getElementById('sacr-comunhao').checked,
+                    crisma: document.getElementById('sacr-crisma').checked,
+                    matrimonio: document.getElementById('sacr-matrimonio').checked
+                },
+
+                equipes: equipesTrabalhadas,
+                talentos: document.getElementById('talentos').value,
+                restricoes_saude: document.getElementById('restricoes').value,
+                ultima_atualizacao: new Date()
+            };
+
+            try {
+                await addDoc(collection(db, "fichas_membros"), fichaMembro);
+                alert("Ficha de Membro salva com sucesso!");
+            } catch (error) {
+                console.error("Erro ao salvar ficha: ", error);
+                alert("Erro ao enviar características.");
+            }
+        });
+    </script>
+</body>
+</html>

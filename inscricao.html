@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segue-Me | Ficha de Inscrição</title>
+    <link rel="stylesheet" href="styleinscricao.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+    <div class="form-container" id="conteudo-ficha">
+        <div class="header-ficha">
+            <img src="logo1.png" alt="Logo Segue-Me" class="logo-ficha">
+            <h1>Ficha de Inscrição</h1>
+            <p>Movimento Segue-Me - Paróquia Santo Antônio</p>
+        </div>
+
+        <form id="form-inscricao">
+            <div class="foto-3x4-container">
+                <div class="foto-box" onclick="document.getElementById('input-foto').click()">
+                    <span id="label-foto">Foto 3x4</span>
+                    <img id="preview-foto" src="" style="display:none; width:100%; height:100%; object-fit:cover; border-radius:10px;">
+                </div>
+                <input type="file" id="input-foto" accept="image/*" style="display:none" onchange="previewImage(event)">
+            </div>
+
+            <div class="section-title">1. Dados Pessoais</div>
+            
+            <div class="input-group full">
+                <label for="nome-cand">Nome Completo</label>
+                <input type="text" id="nome-cand" required>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="nasc-cand">Data de Nascimento</label>
+                    <input type="date" id="nasc-cand" required>
+                </div>
+                <div class="input-group">
+                    <label for="apelido-cand">Como gosta de ser chamado?</label>
+                    <input type="text" id="apelido-cand">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="whats-cand">WhatsApp</label>
+                    <input type="tel" id="whats-cand" placeholder="(00) 00000-0000" required>
+                </div>
+                <div class="input-group">
+                    <label for="email-cand">E-mail</label>
+                    <input type="email" id="email-cand" required>
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group" style="flex: 3;">
+                    <label for="end-cand">Endereço Residencial</label>
+                    <input type="text" id="end-cand" required>
+                </div>
+                <div class="input-group" style="flex: 1;">
+                    <label for="num-cand">Nº</label>
+                    <input type="text" id="num-cand" required>
+                </div>
+            </div>
+
+            <div class="section-title">2. Filiação e Contatos de Emergência</div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="pai-cand">Nome do Pai</label>
+                    <input type="text" id="pai-cand" required>
+                </div>
+                <div class="input-group">
+                    <label for="tel-pai">Telefone do Pai</label>
+                    <input type="tel" id="tel-pai" required>
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="mae-cand">Nome da Mãe</label>
+                    <input type="text" id="mae-cand" required>
+                </div>
+                <div class="input-group">
+                    <label for="tel-mae">Telefone do Mãe</label>
+                    <input type="tel" id="tel-mae" required>
+                </div>
+            </div>
+
+            <div class="section-title">3. Vida Religiosa e Sacramentos</div>
+            <p style="font-size: 13px; margin-bottom: 5px; font-weight: bold;">Quais sacramentos você possui?</p>
+            <div class="checkbox-row">
+                <label><input type="checkbox" id="sacr-bat"> Batismo</label>
+                <label><input type="checkbox" id="sacr-com"> Primeira Comunhão</label>
+                <label><input type="checkbox" id="sacr-cri"> Crisma</label>
+            </div>
+
+            <div class="section-title">4. Quem te Convidou?</div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="quem-conv">Nome de quem te convidou</label>
+                    <input type="text" id="quem-conv" required>
+                </div>
+                <div class="input-group">
+                    <label for="whats-conv">WhatsApp de quem convidou</label>
+                    <input type="tel" id="whats-conv" required>
+                </div>
+            </div>
+
+            <div class="consentimento-box">
+                <input type="checkbox" id="lgpd" required>
+                <label for="lgpd" style="display: inline; font-weight: normal;">
+                    Autorizo o movimento Segue-Me a guardar e utilizar meus dados exclusivamente para fins de organização do encontro, respeitando as normas da LGPD.
+                </label>
+            </div>
+
+            <div class="assinatura-container">
+                <label>Assinatura do Candidato (Obrigatório)</label>
+                <div class="campo-assinatura"></div>
+            </div>
+            
+            <br>
+            <button type="submit" style="width: 100%; padding: 14px; background: #d4af37; border: none; color: white; font-weight: bold; border-radius: 4px; cursor: pointer;">Enviar Ficha Eletronicamente</button>
+        </form>
+    </div>
+
+    <div class="button-container">
+        <button type="button" class="btn-pdf" onclick="gerarPDF()">Baixar Cópia em PDF</button>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('preview-foto');
+                const label = document.getElementById('label-foto');
+                output.src = reader.result;
+                output.style.display = 'block';
+                label.style.display = 'none';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function gerarPDF() {
+            const element = document.getElementById('conteudo-ficha');
+            const opt = {
+                margin: 10,
+                filename: 'Ficha_Inscricao_SegueMe.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+
+    <script type="module">
+        import { db, collection, addDoc } from "./firebase-config.js";
+
+        document.getElementById('form-inscricao').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const inscricaoNovoJovem = {
+                nome_candidato: document.getElementById('nome-cand').value,
+                data_nascimento: document.getElementById('nasc-cand').value,
+                apelido: document.getElementById('apelido-cand').value,
+                whatsapp: document.getElementById('whats-cand').value,
+                email: document.getElementById('email-cand').value,
+                endereco: document.getElementById('end-cand').value,
+                numero: document.getElementById('num-cand').value,
+                filiacao: {
+                    pai: document.getElementById('pai-cand').value,
+                    telefone_pai: document.getElementById('tel-pai').value,
+                    mae: document.getElementById('mae-cand').value,
+                    telefone_mae: document.getElementById('tel-mae').value
+                },
+                sacramentos: {
+                    batismo: document.getElementById('sacr-bat').checked,
+                    comunhao: document.getElementById('sacr-com').checked,
+                    crisma: document.getElementById('sacr-cri').checked
+                },
+                padrinho_madrinha: {
+                    nome: document.getElementById('quem-conv').value,
+                    whatsapp: document.getElementById('whats-conv').value
+                },
+                data_envio: new Date(),
+                status: "Pendente"
+            };
+
+            try {
+                await addDoc(collection(db, "inscricoes_novos_jovens"), inscricaoNovoJovem);
+                alert("Sua Ficha de Inscrição foi enviada com sucesso para a coordenação do Segue-Me!");
+            } catch (error) {
+                console.error("Erro ao enviar inscrição: ", error);
+                alert("Erro ao salvar inscrição no servidor do Google.");
+            }
+        });
+    </script>
+</body>
+</html>

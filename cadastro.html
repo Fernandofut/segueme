@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segue-Me | Cadastro</title>
+    <link rel="stylesheet" href="stylecadastro.css">
+</head>
+<body>
+
+    <div class="cadastro-container">
+        <div class="cadastro-card">
+            <div class="logo-box">
+                <img src="logo1.png" alt="Segue-Me Logo">
+            </div>
+
+            <h2>Criar Nova Conta</h2>
+            <p class="subtitle">Preencha os campos abaixo para participar.</p>
+
+            <form id="form-cadastro">
+                <div class="input-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" placeholder="Ex: João Silva" required>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="nascimento">Data de Nascimento</label>
+                        <input type="date" id="nascimento" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="whatsapp">WhatsApp</label>
+                        <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="seuemail@exemplo.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" placeholder="Mínimo 6 caracteres" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmar-senha">Confirmar Senha</label>
+                    <input type="password" id="confirmar-senha" placeholder="Repita a senha" required>
+                </div>
+
+                <button type="submit" class="btn-cadastrar">Finalizar Cadastro</button>
+            </form>
+
+            <div class="footer-links">
+                <span>Já tem uma conta?</span>
+                <a href="index.html">Voltar para o Login</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { db, collection, addDoc } from "./firebase-config.js";
+
+        document.getElementById('form-cadastro').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const senha = document.getElementById('senha').value;
+            const confirmarSenha = document.getElementById('confirmar-senha').value;
+
+            if (senha !== confirmarSenha) {
+                alert("As senhas não coincidem!");
+                return;
+            }
+
+            const dadosUsuario = {
+                nome: document.getElementById('nome').value,
+                data_nascimento: document.getElementById('nascimento').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                email: document.getElementById('email').value,
+                senha: senha, // Nota: Em um sistema real de produção, use o Firebase Auth para senhas criptografadas
+                data_cadastro: new Date()
+            };
+
+            try {
+                await addDoc(collection(db, "usuarios"), dadosUsuario);
+                alert("Cadastro realizado com sucesso! Faça seu login.");
+                window.location.href = "index.html";
+            } catch (error) {
+                console.error("Erro ao cadastrar: ", error);
+                alert("Erro ao salvar cadastro.");
+            }
+        });
+    </script>
+</body>
+</html>
