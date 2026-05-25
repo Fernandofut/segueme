@@ -15,8 +15,8 @@
             </div>
         </div>
 
-        <h2 id="main-title">A Paz esteja contigo!</h2>
-        <p id="main-subtitle" class="subtitle">Faça login para continuar sua jornada.</p>
+        <h2 id=\"main-title\">A Paz esteja contigo!</h2>
+        <p id=\"main-subtitle\" class=\"subtitle\">Faça login para continuar sua jornada.</p>
 
         <form id="auth-form">
             <div class="input-group">
@@ -29,9 +29,9 @@
                 <input type="password" id="password" placeholder="••••••••" required>
             </div>
 
-           <a href="formulario.html" type="submit" class="btn-entrar" id="submit-btn">Entrar</a>
-         <br><br>   
-            <a href="inscricao.html" target="_blank" class="btn-ficha-jovem">Fazer Ficha Jovem</a>
+            <button type="submit" class="btn-entrar" id="submit-btn">Entrar</button>
+            <br><br>   
+            <a href="inscricao.html" target="_blank" class="btn-ficha-jovem" style="display: block; text-decoration: none; text-align: center; background: #333; color: white; padding: 10px; border-radius: 10px; font-weight: bold;">Fazer Ficha Jovem</a>
         </form>
 
         <div class="footer-links">
@@ -41,26 +41,73 @@
     </div>
 
     <script type="module">
-        import { db, collection, addDoc } from "./firebase-config.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBigAjWkFd6mqKGoxJyQX4hBLTbCOMx4Is",
+            authDomain: "segue-me-55296.firebaseapp.com",
+            projectId: "segue-me-55296",
+            storageBucket: "segue-me-55296.firebasestorage.app",
+            messagingSenderId: "326941771035",
+            appId: "1:326941771035:web:d1a60c2694536816deffbe",
+            measurementId: "G-4KHGR7Q6KP"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
         document.getElementById('auth-form').addEventListener('submit', async function(e) {
-            e.preventDefault(); // Impede a página de recarregar automaticamente
+            e.preventDefault();
 
-            const emailInput = document.getElementById('email').value;
+            const emailInput = document.getElementById('email').value.trim().toLowerCase();
+            const passwordInput = document.getElementById('password').value;
+            const btn = document.getElementById('submit-btn');
+
+            btn.disabled = true;
+            btn.innerText = "Verificando...";
 
             try {
-                // Envia e salva o acesso em tempo real no banco Firestore do Google
-                await addDoc(collection(db, "historico_acessos"), {
-                    email: emailInput,
-                    data_acesso: new Date()
+                // Procura na coleção "usuarios" se existe este e-mail
+                const q = query(collection(db, "usuarios"), where("email", "==", emailInput));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    alert("Usuário não encontrado! Verifique o e-mail ou crie uma conta.");
+                    btn.disabled = false;
+                    btn.innerText = "Entrar";
+                    return;
+                }
+
+                let loginSucesso = false;
+                let nomeUsuario = "";
+
+                querySnapshot.forEach((doc) => {
+                    const userData = doc.data();
+                    if (userData.senha === passwordInput) {
+                        loginSucesso = true;
+                        nomeUsuario = userData.nome;
+                    }
                 });
 
-                // Após gravar com sucesso no banco, redireciona o usuário
-                window.location.href = "formulario.html";
+                if (loginSucesso) {
+                    // Grava a sessão local no computador do usuário
+                    localStorage.setItem('usuarioLogado', emailInput);
+                    localStorage.setItem('nomeUsuarioLogado', nomeUsuario);
+                    
+                    alert("Login efetuado com sucesso! Bem-vindo.");
+                    window.location.href = "formulario.html";
+                } else {
+                    alert("Senha incorreta! Tente novamente.");
+                    btn.disabled = false;
+                    btn.innerText = "Entrar";
+                }
+
             } catch (error) {
-                console.error("Erro ao salvar no Firebase: ", error);
-                // Garante o redirecionamento mesmo se o banco estiver em configuração
-                window.location.href = "formulario.html";
+                console.error("Erro na autenticação: ", error);
+                alert("Erro ao conectar com o servidor do Firebase.");
+                btn.disabled = false;
+                btn.innerText = "Entrar";
             }
         });
     </script>
